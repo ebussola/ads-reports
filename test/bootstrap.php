@@ -7,3 +7,4 @@
  */
 
 require __DIR__ . '/../vendor/autoload.php';
+require 'tools/StatsGen.php';
