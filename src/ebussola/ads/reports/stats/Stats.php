@@ -14,6 +14,51 @@ use ebussola\ads\reports\MathHelper;
 class Stats implements \ebussola\ads\reports\Stats {
 
     /**
+     * @var string
+     */
+    public $object_id;
+
+    /**
+     * @var string
+     */
+    public $name;
+
+    /**
+     * @var \DateTime
+     */
+    public $time_start;
+
+    /**
+     * @var \DateTime
+     */
+    public $time_end;
+
+    /**
+     * @var int
+     */
+    public $clicks;
+
+    /**
+     * @var int
+     */
+    public $impressions;
+
+    /**
+     * @var float
+     */
+    public $cost;
+
+    /**
+     * @var float
+     */
+    public $cpc;
+
+    /**
+     * @var float
+     */
+    public $ctr;
+
+    /**
      * @param string    $object_id
      * @param string    $name
      * @param \DateTime $time_start
