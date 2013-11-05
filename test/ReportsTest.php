@@ -38,4 +38,11 @@ class ReportsTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('2013-10-20', $sliced->stats[10]->time_start->format('Y-m-d'));
     }
 
+    public function testFindStats() {
+        $stats_report = StatsGen::genStatsReportDateRange(new DateTime('2013-10-01'), new DateTime('2013-10-30'));
+        $stats = $this->reports->findStats('time_start', new DateTime('2013-10-15'), $stats_report);
+
+        $this->assertEquals('2013-10-15', $stats->time_start->format('Y-m-d'));
+    }
+
 }

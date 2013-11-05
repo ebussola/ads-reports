@@ -16,7 +16,7 @@ class StatsGen {
         $time_start = new DateTime('-'.rand(1, 31).' days');
         $time_end = new DateTime('now');
         $clicks = rand(0, 3000);
-        $impressions = $clicks * rand(5, 8);
+        $impressions = $clicks * rand(10, 30);
         $cost = $clicks * (rand(10, 120) / 100);
 
         extract($override);

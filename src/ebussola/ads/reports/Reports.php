@@ -19,12 +19,24 @@ class Reports {
      */
     private $stats_order;
 
-    public function __construct($stats_order=null) {
+    /**
+     * Any valid StatsFinder.
+     * Every method must have two attributes: StatsReport and the value to be founded
+     *
+     * This class is a DuckType
+     */
+    private $stats_finder;
+
+    public function __construct($stats_order=null, $stats_finder=null) {
         if ($stats_order === null) {
             $stats_order = new StatsOrder();
         }
+        if ($stats_finder === null) {
+            $stats_finder = new StatsFinder();
+        }
 
         $this->stats_order = $stats_order;
+        $this->stats_finder = $stats_finder;
     }
 
     /**
@@ -59,13 +71,26 @@ class Reports {
     }
 
     /**
+     * @param string      $find_by
+     * @param mixed       $value
+     * @param StatsReport $stats_report
+     *
+     * @return Stats | StatsReport
+     */
+    public function findStats($find_by, $value, StatsReport $stats_report) {
+        return call_user_func_array(array($this->stats_finder, $find_by), array($stats_report, $value));
+    }
+
+    /**
      * @param \DateTime $datetime
      *
      * @return int
      */
     private function findStatsKeyByDateTime(StatsReport $stats_report, \DateTime $datetime) {
-        foreach ($stats_report->stats as $key => $stats) {
-            if ($stats->time_start->getTimestamp() == $datetime->getTimestamp()) {
+        $stats1 = $this->findStats('time_start', $datetime, $stats_report);
+
+        foreach ($stats_report->stats as $key => $stats2) {
+            if ($stats1 == $stats2) {
                 return $key;
             }
         }
