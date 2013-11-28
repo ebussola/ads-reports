@@ -12,9 +12,11 @@ class StatsReportTest extends PHPUnit_Framework_TestCase {
 
     public function testUnMutable() {
         $stats_report = StatsGen::genStatsReport();
-        $stats_report->set('clicks', 5000);
+        $stats_report->clicks = 5000;
 
-        $this->assertNotEquals(5000, $stats_report->get('clicks'));
+        $stats_report->refreshValues();
+
+        $this->assertNotEquals(5000, $stats_report->clicks);
     }
 
     public function testAddStats() {

@@ -16,7 +16,15 @@ class StatsTest extends PHPUnit_Framework_TestCase {
     private $stats;
 
     public function setUp() {
-        $this->stats = new Stats(1, 'Teste do Stats', new DateTime('-5 days'), new DateTime('now'), 876, 393372, 1528.09);
+        $this->stats = new Stats();
+        $this->stats->object_id = 1;
+        $this->stats->name = 'Teste do Stats';
+        $this->stats->time_start = new DateTime('-5 days');
+        $this->stats->time_end = new DateTime('now');
+        $this->stats->clicks = 876;
+        $this->stats->impressions = 393372;
+        $this->stats->cost = 1528.09;
+        $this->stats->refreshValues();
     }
 
     public function testInstantiateStats() {
@@ -25,12 +33,19 @@ class StatsTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testMerge() {
-        $time_start = new DateTime('-6 days');
-        $stats2 = new Stats(1, 'Teste de Merge', $time_start, new DateTime('-1 day'), 100, 2000, 234.80);
+        $time_start = new \DateTime('-6 days');
+        $stats2 = new Stats();
+        $stats2->object_id = 1;
+        $stats2->name = 'Teste de Merge';
+        $stats2->time_start = $time_start;
+        $stats2->time_end = new \DateTime('-1 day');
+        $stats2->clicks = 100;
+        $stats2->impressions = 2000;
+        $stats2->cost = 234.80;
 
         $this->stats->merge($stats2);
 
-        $now = new DateTime('now');
+        $now = new \DateTime('now');
         $this->assertEquals($time_start->getTimestamp(), $this->stats->time_start->getTimestamp());
         $this->assertEquals($now->getTimestamp(), $this->stats->time_end->getTimestamp());
         $this->assertEquals(976, $this->stats->clicks);

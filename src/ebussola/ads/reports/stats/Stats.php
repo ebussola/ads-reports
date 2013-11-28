@@ -59,27 +59,6 @@ class Stats implements \ebussola\ads\reports\Stats {
     public $ctr;
 
     /**
-     * @param string    $object_id
-     * @param string    $name
-     * @param \DateTime $time_start
-     * @param \DateTime $time_end
-     * @param int       $clicks
-     * @param int       $impressions
-     * @param float     $cost
-     */
-    public function __construct($object_id, $name, $time_start, $time_end, $clicks, $impressions, $cost) {
-        $this->object_id = $object_id;
-        $this->name = $name;
-        $this->time_start = $time_start;
-        $this->time_end = $time_end;
-        $this->clicks = $clicks;
-        $this->impressions = $impressions;
-        $this->cost = $cost;
-
-        $this->refreshValues();
-    }
-
-    /**
      * @param Stats $stats
      *
      * @return Stats
@@ -102,7 +81,7 @@ class Stats implements \ebussola\ads\reports\Stats {
     /**
      * Sets the calculable values, based on values already setted
      */
-    protected function refreshValues() {
+    public function refreshValues() {
         $this->cpc = MathHelper::calcCpc($this->cost, $this->clicks);
         $this->ctr = MathHelper::calcCtr($this->clicks, $this->impressions);
     }

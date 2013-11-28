@@ -21,17 +21,4 @@ interface StatsReport extends Stats {
      */
     public function addStats(Stats $stats);
 
-    /**
-     * @param string $property
-     *
-     * @return mixed
-     */
-    public function get($property);
-
-    /**
-     * @param string $property
-     * @param mixed  $value
-     */
-    public function set($property, $value);
-
 }

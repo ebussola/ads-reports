@@ -21,7 +21,17 @@ class StatsGen {
 
         extract($override);
 
-        return new Stats($object_id, $name, $time_start, $time_end, $clicks, $impressions, $cost);
+        $stats = new Stats();
+        $stats->object_id = $object_id;
+        $stats->name = $name;
+        $stats->time_start = $time_start;
+        $stats->time_end = $time_end;
+        $stats->clicks = $clicks;
+        $stats->impressions = $impressions;
+        $stats->cost = $cost;
+        $stats->refreshValues();
+
+        return $stats;
     }
 
     static public function genStatsReport() {

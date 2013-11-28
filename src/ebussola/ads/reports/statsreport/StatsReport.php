@@ -50,31 +50,7 @@ class StatsReport extends Stats implements \ebussola\ads\reports\StatsReport {
         parent::refreshValues();
     }
 
-    /**
-     * @param string $name
-     * @param mixed  $value
-     */
-    public function set($name, $value) {
-        $this->properties_integrity = true;
-
-        $this->{$name} = $value;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return mixed
-     */
-    public function get($name) {
-        if ($this->properties_integrity === true) {
-            $this->properties_integrity = false;
-            $this->refreshValues();
-        }
-
-        return $this->{$name};
-    }
-
-    protected function refreshValues() {
+    public function refreshValues() {
         $statses = $this->stats;
         $this->stats = array();
 

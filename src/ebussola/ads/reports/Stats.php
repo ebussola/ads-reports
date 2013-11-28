@@ -31,4 +31,9 @@ interface Stats {
      */
     public function merge(Stats $stats);
 
+    /**
+     * refresh calculable values (like ctr and cpc) with the actual values
+     */
+    public function refreshValues();
+
 }
