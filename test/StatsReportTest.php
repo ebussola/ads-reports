@@ -39,6 +39,17 @@ class StatsReportTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(MathHelper::calcCtr($stats_report->clicks, $stats_report->impressions), $stats_report->ctr);
         $this->assertEquals($early_time_start, $stats_report->time_start);
         $this->assertEquals($latest_time_end, $stats_report->time_end);
+
+        return $stats_report;
+    }
+
+    /**
+     * @depends testAddStats
+     */
+    public function testIterableStatsReport($stats_report) {
+        foreach ($stats_report as $stats) {
+            $this->assertInstanceOf('\ebussola\ads\reports\Stats', $stats);
+        }
     }
 
 }
