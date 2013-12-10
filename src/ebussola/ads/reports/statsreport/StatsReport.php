@@ -10,7 +10,7 @@ namespace ebussola\ads\reports\statsreport;
 
 use ebussola\ads\reports\stats\Stats;
 
-class StatsReport extends Stats implements \ebussola\ads\reports\StatsReport, \Iterator {
+class StatsReport extends Stats implements \ebussola\ads\reports\StatsReport {
 
     /**
      * false = OK

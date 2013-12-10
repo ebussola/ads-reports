@@ -14,7 +14,7 @@ namespace ebussola\ads\reports;
  *
  * @property Stats[] $stats
  */
-interface StatsReport extends Stats {
+interface StatsReport extends Stats, \Iterator {
 
     /**
      * @param Stats $stats
