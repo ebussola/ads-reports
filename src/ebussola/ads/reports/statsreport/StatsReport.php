@@ -13,21 +13,12 @@ use ebussola\ads\reports\stats\Stats;
 class StatsReport extends Stats implements \ebussola\ads\reports\StatsReport {
 
     /**
-     * false = OK
-     * true = MAYBE CORRUPT
-     *
-     * @var bool
-     */
-    public $properties_integrity;
-
-    /**
      * @var \ebussola\ads\reports\Stats[]
      */
     public $stats;
 
     public function __construct() {
         $this->stats = array();
-        $this->properties_integrity = false;
     }
 
     /**
