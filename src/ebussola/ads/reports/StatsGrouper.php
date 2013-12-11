@@ -37,4 +37,52 @@ class StatsGrouper {
         return $stats_report;
     }
 
+    /**
+     * @param StatsReport | Stats[] $stats_report
+     */
+    public function month(StatsReport $stats_report) {
+        /** @var Stats[] $stats_date */
+        $stats_date = array();
+        foreach ($stats_report as $stats) {
+            $key_date = $stats->time_start->format('mY');
+
+            if (isset($stats_date[$key_date])) {
+                $stats_date[$key_date]->merge($stats);
+            } else {
+                $stats_date[$key_date] = clone $stats;
+            }
+        }
+
+        $stats_report->purgeStats();
+        foreach ($stats_date as $stats) {
+            $stats_report->addStats($stats);
+        }
+
+        return $stats_report;
+    }
+
+    /**
+     * @param StatsReport | Stats[] $stats_report
+     */
+    public function hour(StatsReport $stats_report) {
+        /** @var Stats[] $stats_date */
+        $stats_date = array();
+        foreach ($stats_report as $stats) {
+            $key_date = $stats->time_start->format('H');
+
+            if (isset($stats_date[$key_date])) {
+                $stats_date[$key_date]->merge($stats);
+            } else {
+                $stats_date[$key_date] = clone $stats;
+            }
+        }
+
+        $stats_report->purgeStats();
+        foreach ($stats_date as $stats) {
+            $stats_report->addStats($stats);
+        }
+
+        return $stats_report;
+    }
+
 }

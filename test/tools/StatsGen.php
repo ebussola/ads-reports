@@ -56,4 +56,15 @@ class StatsGen {
         return $stats_report;
     }
 
+    static public function genStatsReportHourRange(\DateTime $time_start, \DateTime $time_end) {
+        $stats_report = new \ebussola\ads\reports\statsreport\StatsReport();
+
+        $period = new DatePeriod($time_start, new DateInterval('PT1H'), $time_end);
+        foreach ($period as $date) {
+            $stats_report->addStats(self::genStats(array('time_start' => $date, 'time_end' => new DateTime('now'))));
+        }
+
+        return $stats_report;
+    }
+
 }
