@@ -8,9 +8,6 @@
 
 namespace ebussola\ads\reports;
 
-
-use ebussola\ads\reports\statsreport\StatsReport;
-
 class StatsGrouper {
 
     /**
