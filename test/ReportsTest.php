@@ -45,4 +45,23 @@ class ReportsTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('2013-10-15', $stats->time_start->format('Y-m-d'));
     }
 
+    public function testGroupByDate() {
+        $stats_reports = array();
+        $stats_reports[1] = StatsGen::genStatsReportDateRange(new DateTime('2013-10-01'), new DateTime('2013-10-30'));
+        $stats_reports[2] = StatsGen::genStatsReportDateRange(new DateTime('2013-10-01'), new DateTime('2013-10-30'));
+        $stats_reports[3] = StatsGen::genStatsReportDateRange(new DateTime('2013-10-01'), new DateTime('2013-10-30'));
+
+        $main_report = new \ebussola\ads\reports\statsreport\StatsReport();
+        foreach ($stats_reports as $stats_report) {
+            foreach ($stats_report as $stats) {
+                $main_report->addStats($stats);
+            }
+        }
+
+        $this->assertCount(87, $main_report->stats);
+
+        $this->reports->groupBy('date', $main_report);
+        $this->assertCount(29, $main_report->stats);
+    }
+
 }

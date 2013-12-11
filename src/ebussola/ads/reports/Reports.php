@@ -27,16 +27,28 @@ class Reports {
      */
     private $stats_finder;
 
-    public function __construct($stats_order=null, $stats_finder=null) {
+    /**
+     * Any valid StatsGrouper.
+     * Every method must have one attribute: StatsReport to be grouped
+     *
+     * This class is a DuckType
+     */
+    private $stats_grouper;
+
+    public function __construct($stats_order=null, $stats_finder=null, $stats_grouper=null) {
         if ($stats_order === null) {
             $stats_order = new StatsOrder();
         }
         if ($stats_finder === null) {
             $stats_finder = new StatsFinder();
         }
+        if ($stats_grouper === null) {
+            $stats_grouper = new StatsGrouper();
+        }
 
         $this->stats_order = $stats_order;
         $this->stats_finder = $stats_finder;
+        $this->stats_grouper = $stats_grouper;
     }
 
     /**
@@ -79,6 +91,16 @@ class Reports {
      */
     public function findStats($find_by, $value, StatsReport $stats_report) {
         return call_user_func_array(array($this->stats_finder, $find_by), array($stats_report, $value));
+    }
+
+    /**
+     * @param string      $group_by
+     * @param StatsReport $stats_report
+     *
+     * @return StatsReport
+     */
+    public function groupBy($group_by, StatsReport $stats_report) {
+        return call_user_func_array(array($this->stats_grouper, $group_by), array($stats_report));
     }
 
     /**

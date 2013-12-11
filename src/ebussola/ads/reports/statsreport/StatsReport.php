@@ -50,6 +50,13 @@ class StatsReport extends Stats implements \ebussola\ads\reports\StatsReport {
         parent::refreshValues();
     }
 
+    /**
+     * @return void
+     */
+    public function purgeStats() {
+        $this->stats = array();
+    }
+
     public function refreshValues() {
         $statses = $this->stats;
         $this->stats = array();
@@ -111,4 +118,5 @@ class StatsReport extends Stats implements \ebussola\ads\reports\StatsReport {
     public function rewind() {
         reset($this->stats);
     }
+
 }

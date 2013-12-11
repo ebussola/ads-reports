@@ -21,4 +21,9 @@ interface StatsReport extends Stats, \Iterator {
      */
     public function addStats(Stats $stats);
 
+    /**
+     * @return void
+     */
+    public function purgeStats();
+
 }
