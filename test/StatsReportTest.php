@@ -52,4 +52,30 @@ class StatsReportTest extends PHPUnit_Framework_TestCase {
         }
     }
 
+    public function testPurgeStats() {
+        $stats_report = StatsGen::genStatsReport();
+
+        $stats_report2 = clone $stats_report;
+        $stats_report2->purgeStats();
+
+        $this->assertNotEquals($stats_report->clicks, $stats_report2->clicks);
+        $this->assertNotEquals($stats_report->impressions, $stats_report2->impressions);
+        $this->assertNotEquals($stats_report->cost, $stats_report2->cost);
+        $this->assertNotEquals($stats_report->cpc, $stats_report2->cpc);
+        $this->assertNotEquals($stats_report->ctr, $stats_report2->ctr);
+    }
+
+    public function testPurgeStatsOnRefresh() {
+        $stats_report = StatsGen::genStatsReport();
+
+        $stats_report2 = clone $stats_report;
+        $stats_report2->refreshValues();
+
+        $this->assertEquals($stats_report->clicks, $stats_report2->clicks);
+        $this->assertEquals($stats_report->impressions, $stats_report2->impressions);
+        $this->assertEquals($stats_report->cost, $stats_report2->cost);
+        $this->assertEquals($stats_report->cpc, $stats_report2->cpc);
+        $this->assertEquals($stats_report->ctr, $stats_report2->ctr);
+    }
+
 }

@@ -46,11 +46,19 @@ class StatsReport extends Stats implements \ebussola\ads\reports\StatsReport {
      */
     public function purgeStats() {
         $this->stats = array();
+
+        $this->time_start = null;
+        $this->time_end = null;
+        $this->clicks = null;
+        $this->impressions = null;
+        $this->cost = null;
+        $this->cpc = null;
+        $this->ctr = null;
     }
 
     public function refreshValues() {
         $statses = $this->stats;
-        $this->stats = array();
+        $this->purgeStats();
 
         foreach ($statses as $stats) {
             $this->addStats($stats);
